@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>英语听力训练</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="听力训练">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#2563eb">
+  
+  <!-- PWA Icons -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+  
+  <!-- Splash Screen (iPhone) - will show icon on launch -->
+  <link rel="apple-touch-startup-image" href="icon-512.png">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="header">
+      <div class="header-inner">
+        <div class="logo" onclick="App.goHome()">&#x1F50A; 听力训练</div>
+        <nav id="nav">
+          <button class="nav-btn" data-view="home" onclick="App.goHome()">首页</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <!-- Home View -->
+      <section id="view-home" class="view active">
+        <div class="container">
+          <h1 class="page-title">选择课程开始训练</h1>
+          <div class="level-tabs">
+            <button class="level-tab active" data-level="all">全部</button>
+            <button class="level-tab" data-level="beginner">初级</button>
+            <button class="level-tab" data-level="intermediate">中级</button>
+            <button class="level-tab" data-level="advanced">高级</button>
+          </div>
+          <div id="lesson-grid" class="lesson-grid"></div>
+        </div>
+      </section>
+
+      <!-- Mode Select View -->
+      <section id="view-mode" class="view">
+        <div class="container">
+          <div class="breadcrumb">
+            <a onclick="App.goHome()">课程列表</a>
+            <span class="sep">/</span>
+            <span id="breadcrumb-lesson"></span>
+          </div>
+          <h2 id="mode-lesson-title" class="page-title"></h2>
+          <p id="mode-lesson-desc" class="lesson-desc"></p>
+          <div class="mode-grid">
+            <div class="mode-card" data-mode="dictation" onclick="App.startTraining('dictation')">
+              <div class="mode-icon">&#x270D;</div>
+              <h3>听写训练</h3>
+              <p>播放音频，写下你听到的内容，逐词对比检查</p>
+            </div>
+            <div class="mode-card" data-mode="quiz" onclick="App.startTraining('quiz')">
+              <div class="mode-icon">&#x2753;</div>
+              <h3>选择题</h3>
+              <p>听完全文后回答阅读理解问题</p>
+            </div>
+            <div class="mode-card" data-mode="shadowing" onclick="App.startTraining('shadowing')">
+              <div class="mode-icon">&#x1F3A4;</div>
+              <h3>影子跟读</h3>
+              <p>逐句跟读，提升口语和听力</p>
+            </div>
+            <div class="mode-card" data-mode="cloze" onclick="App.startTraining('cloze')">
+              <div class="mode-icon">&#x1F4DD;</div>
+              <h3>填空听写</h3>
+              <p>听音频填写文本中缺失的关键词</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Training View -->
+      <section id="view-training" class="view">
+        <div class="container">
+          <div class="breadcrumb">
+            <a onclick="App.goBackToMode()">返回模式选择</a>
+            <span class="sep">/</span>
+            <span id="training-breadcrumb-mode"></span>
+          </div>
+          <div id="training-content"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/content.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/dictation.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/shadowing.js"></script>
+  <script src="js/cloze.js"></script>
+  <script src="js/app.js"></script>
+  
+  <!-- Register Service Worker for offline support -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(() => {
+          console.log('SW registered');
+        }).catch((err) => {
+          console.log('SW registration failed:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
