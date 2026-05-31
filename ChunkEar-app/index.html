@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ChunkEar · 语块听</title>
+
+  <!-- PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ChunkEar">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#4A90D9">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="../icon-192.png">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ====== HEADER ====== -->
+  <header id="header">
+    <div class="header-inner">
+      <div class="logo" onclick="ChunkApp.showHome()">
+        🎧 ChunkEar
+        <span class="logo-sub">语块听</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== MAIN ====== -->
+  <main id="main-content">
+
+    <!-- HOME VIEW -->
+    <section id="view-home" class="view active">
+      <h1 class="section-title">语义模块听力训练</h1>
+      <p class="section-subtitle">
+        从最简单的语义模块开始，逐级自动化，彻底攻克英语听力。<br>
+        不达标，不进级。
+      </p>
+      <div class="level-grid" id="level-grid"></div>
+      <div style="margin-top:20px;text-align:center;font-size:12px;color:#bbb;">
+        数据自动保存在本机 · 隐私无忧
+      </div>
+    </section>
+
+    <!-- LEVEL VIEW -->
+    <section id="view-level" class="view">
+      <div class="back-row" onclick="ChunkApp.goBack()">
+        <button class="back-btn">‹</button>
+        <span style="font-size:14px;color:#888;">返回</span>
+      </div>
+      <div class="level-header">
+        <h2 id="level-title"></h2>
+        <div class="stats" id="level-stats"></div>
+      </div>
+
+      <div class="section-title" style="font-size:16px;margin-bottom:8px;">练习模式</div>
+      <div class="mode-grid" id="level-modes"></div>
+
+      <div style="margin-top:24px;">
+        <div class="section-title" style="font-size:16px;margin-bottom:8px;">模块列表</div>
+        <div class="module-list" id="module-list"></div>
+      </div>
+    </section>
+
+    <!-- TRAINING VIEW -->
+    <section id="view-training" class="view">
+      <div class="back-row" onclick="ChunkApp.goBack()">
+        <button class="back-btn">‹</button>
+        <span style="font-size:14px;color:#888;">返回</span>
+      </div>
+      <div id="training-header"></div>
+      <div id="training-area" class="training-area"><div class="loading">加载中...</div></div>
+    </section>
+
+  </main>
+
+  <!-- ====== SCRIPTS ====== -->
+  <script src="js/audio.js"></script>
+  <script src="js/corpus.js"></script>
+  <script src="js/chunkear.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => ChunkApp.init());
+  </script>
+</body>
+</html>
